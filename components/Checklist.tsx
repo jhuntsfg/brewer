@@ -44,29 +44,29 @@ export default function Checklist({
         const isOpen = openGroups.has(group);
 
         return (
-          <div key={group} className="rounded-xl border border-gray-100 overflow-hidden bg-white">
+          <div key={group} className="rounded-xl border border-primary/20 overflow-hidden bg-white">
             <button
               onClick={() => toggleGroup(group)}
-              className="w-full flex items-center justify-between px-4 py-3 hover:bg-background transition-colors"
+              className="w-full flex items-center justify-between px-4 py-3 bg-primary hover:bg-primary-dark transition-colors"
             >
               <div className="flex items-center gap-2">
-                <span className={`text-sm font-semibold ${complete ? "text-primary" : "text-gray-700"}`}>
+                <span className="text-sm font-semibold text-white">
                   {group}
                 </span>
                 {complete && (
-                  <span className="text-xs bg-primary-light text-primary rounded-full px-2 py-0.5 font-medium">
+                  <span className="text-xs bg-white/20 text-white rounded-full px-2 py-0.5 font-medium">
                     Complete
                   </span>
                 )}
               </div>
               <div className="flex items-center gap-3">
-                <span className="text-xs text-gray-400">{done}/{groupSteps.length}</span>
-                <span className="text-gray-400 text-sm">{isOpen ? "▲" : "▼"}</span>
+                <span className="text-xs text-white/70">{done}/{groupSteps.length}</span>
+                <span className="text-white/70 text-sm">{isOpen ? "▲" : "▼"}</span>
               </div>
             </button>
 
             {isOpen && (
-              <div className="px-3 pb-3 space-y-1.5 border-t border-gray-100 pt-3">
+              <div className="px-3 pb-3 space-y-1.5 pt-3">
                 {groupSteps.map((step) => {
                   const check = checks[step.id];
                   const checked = !!check?.checked;

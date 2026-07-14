@@ -110,9 +110,9 @@ export default function AgentSelfPage() {
             <Image
               src="/logo.png"
               alt={AGENCY.name}
-              width={100}
-              height={50}
-              className="object-contain invert opacity-80"
+              width={60}
+              height={60}
+              className="object-contain rounded-full"
             />
           </div>
         </div>
@@ -167,9 +167,9 @@ export default function AgentSelfPage() {
             const done = groupSteps.filter((s) => data.checks[s.id]?.checked).length;
             const pct = Math.round((done / groupSteps.length) * 100);
             return (
-              <div key={group} className="bg-white rounded-xl border border-gray-100 p-3 text-center w-[calc(33%-0.375rem)] min-w-[120px]">
-                <p className="text-lg font-semibold text-primary">{pct}%</p>
-                <p className="text-xs text-gray-500 leading-tight">{group}</p>
+              <div key={group} className="bg-primary rounded-xl p-3 text-center w-[calc(33%-0.375rem)] min-w-[120px]">
+                <p className="text-lg font-semibold text-white">{pct}%</p>
+                <p className="text-xs text-white/70 leading-tight">{group}</p>
               </div>
             );
           })}
