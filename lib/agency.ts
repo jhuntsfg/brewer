@@ -4,24 +4,24 @@
  */
 export const AGENCY = {
   /** Display name used throughout the UI */
-  name: "Hunt Agency",
+  name: "Brewer Agency",
 
   /**
    * Brand colors — also update app/globals.css @theme block to match.
    * These are kept here for reference; Tailwind reads them from CSS.
    *
-   * primary:       #637777   (muted teal — headers, checkboxes, buttons)
-   * primaryLight:  #e4ecec   (pale teal — checked backgrounds)
-   * primaryDark:   #4a5f5f   (darker teal — hover states)
-   * warm:          #7c5a3e   (brown — admin accents)
-   * warmLight:     #f2ebe3   (pale warm — admin backgrounds)
-   * sky:           #a0c3d1   (sky blue — confetti accent)
-   * background:    #f4f1ec   (off-white page background)
+   * primary:       #1b3a5c   (navy — headers, checkboxes, buttons)
+   * primaryLight:  #dce8f2   (pale navy-blue — checked backgrounds)
+   * primaryDark:   #0f2740   (darker navy — hover states)
+   * warm:          #4b9cd3   (carolina blue — admin accents)
+   * warmLight:     #eaf4fb   (pale carolina blue — admin backgrounds)
+   * sky:           #7ec8e3   (light carolina blue — confetti accent)
+   * background:    #ffffff   (white page background)
    */
 
   /**
    * Confetti colors fired when an agent completes a step.
    * Should complement the brand palette.
    */
-  confettiColors: ["#637777", "#a0c3d1", "#7c5a3e", "#ffffff"],
+  confettiColors: ["#1b3a5c", "#4b9cd3", "#7ec8e3", "#ffffff"],
 };

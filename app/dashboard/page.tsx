@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
 import { supabase } from "@/lib/supabaseClient";
 import { computeAgent, ComputedAgent } from "@/lib/computed";
 import { AgentFull } from "@/lib/types";
@@ -12,32 +10,6 @@ import MetricsRow from "@/components/MetricsRow";
 import StallBanner from "@/components/StallBanner";
 import FunnelGroups from "@/components/FunnelGroups";
 import AddAgentModal from "@/components/AddAgentModal";
-
-function TabNav() {
-  const pathname = usePathname();
-  const isInterviews = pathname?.startsWith("/dashboard/interviews");
-  const isOnboarding = !isInterviews;
-  return (
-    <div className="flex gap-1 bg-gray-100 rounded-lg p-1">
-      <Link
-        href="/dashboard"
-        className={`px-4 py-1.5 rounded-md text-sm font-medium transition-colors ${
-          isOnboarding ? "bg-white text-gray-800 shadow-sm" : "text-gray-500 hover:text-gray-700"
-        }`}
-      >
-        Onboarding
-      </Link>
-      <Link
-        href="/dashboard/interviews"
-        className={`px-4 py-1.5 rounded-md text-sm font-medium transition-colors ${
-          isInterviews ? "bg-white text-gray-800 shadow-sm" : "text-gray-500 hover:text-gray-700"
-        }`}
-      >
-        Interviews
-      </Link>
-    </div>
-  );
-}
 
 export type SortKey = "funnel" | "added" | "upline";
 
@@ -102,8 +74,7 @@ export default function DashboardPage() {
     <div className="flex min-h-screen">
       <Sidebar agents={agents} onAddAgent={() => setShowAddModal(true)} />
       <main className="flex-1 p-8">
-        <div className="flex items-center justify-between mb-6">
-          <TabNav />
+        <div className="flex items-center justify-end mb-6">
           <button onClick={handleSignOut} className="text-sm text-gray-500 hover:text-gray-800">
             Sign out
           </button>

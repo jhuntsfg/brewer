@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Agent Onboarding Tracker",
-  description: "Track agents through the onboarding funnel",
+  title: "Brewer Agency | Agent Onboarding Tracker",
+  description: "Track agents through the Brewer Agency onboarding funnel",
 };
 
 export default function RootLayout({
