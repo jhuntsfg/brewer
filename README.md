@@ -1,6 +1,6 @@
-# Agent Onboarding Tracker
+# Brewer Agency — Agent Onboarding Tracker
 
-Full-stack onboarding tracker for insurance agency agents. Next.js (App Router) +
+Full-stack onboarding tracker for Brewer Agency insurance agents. Next.js (App Router) +
 Tailwind CSS + Supabase, built per `AgentOnboardingTracker_ClaudeCodeSpec.docx`.
 
 ## Stack
@@ -22,8 +22,8 @@ server-side API routes using the service role key).
 
 ### 2. Admin user
 
-In Supabase Dashboard → Authentication → Users → Add user, create the admin
-(Chel's) email/password. That's the login used at `/`.
+In Supabase Dashboard → Authentication → Users → Add user, create the admin's
+email/password. That's the login used at `/`.
 
 ### 3. Environment variables
 
