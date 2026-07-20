@@ -160,7 +160,7 @@ export const STEPS: Step[] = [
     name: "Get in the workroom and listen to live dialing",
     group: "Training",
     note: "Password: grit",
-    links: [l("Join Zoom", "https://us02web.zoom.us/j/3580944678?pwd=bjVqVmJZMS9LaDJSMEFidkI4NWozQT09")],
+    links: [l("Join Zoom", "https://us02web.zoom.us/j/84536103772?pwd=ccneAyVfOtOaKcbbmeX8iPfSKUVrug.1")],
   },
   {
     id: "22",
@@ -252,7 +252,7 @@ export const STEPS: Step[] = [
     group: "Business launch",
     links: [l("Counting What Counts Tracker", "http://Tracker.johnwetmore.com/home")],
   },
-  { id: "31", name: "Get in the Zoom Workroom and start dialing", group: "Go time!", note: "Password: grit", links: [l("Join Zoom", "https://us06web.zoom.us/j/3580944678?from=join#success")] },
+  { id: "31", name: "Get in the Zoom Workroom and start dialing", group: "Go time!", note: "Password: grit", links: [l("Join Zoom", "https://us02web.zoom.us/j/84536103772?pwd=ccneAyVfOtOaKcbbmeX8iPfSKUVrug.1")] },
   { id: "32", name: "Set your first appointments — keep dialing!", group: "Go time!" },
   {
     id: "33",
