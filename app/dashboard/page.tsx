@@ -29,11 +29,14 @@ function sortAgents(agents: ComputedAgent[], sort: SortKey): ComputedAgent[] {
   return copy;
 }
 
+type ViewKey = "active" | "archived";
+
 export default function DashboardPage() {
   const router = useRouter();
   const [agents, setAgents] = useState<ComputedAgent[] | null>(null);
   const [showAddModal, setShowAddModal] = useState(false);
   const [sort, setSort] = useState<SortKey>("funnel");
+  const [view, setView] = useState<ViewKey>("active");
 
   async function load() {
     const res = await fetch("/api/admin/agents");
@@ -68,19 +71,35 @@ export default function DashboardPage() {
     return <div className="p-8 text-gray-400">Loading…</div>;
   }
 
-  const sorted = sortAgents(agents, sort);
+  const activeAgents = agents.filter((a) => !a.agent.archived_at);
+  const archivedAgents = agents.filter((a) => !!a.agent.archived_at);
+  const visibleAgents = view === "archived" ? archivedAgents : activeAgents;
+  const sorted = sortAgents(visibleAgents, sort);
 
   return (
     <div className="flex min-h-screen">
-      <Sidebar agents={agents} onAddAgent={() => setShowAddModal(true)} />
+      <Sidebar agents={activeAgents} onAddAgent={() => setShowAddModal(true)} />
       <main className="flex-1 p-8">
         <div className="flex items-center justify-end mb-6">
           <button onClick={handleSignOut} className="text-sm text-gray-500 hover:text-gray-800">
             Sign out
           </button>
         </div>
-        <MetricsRow agents={agents} />
-        <StallBanner agents={agents} />
+        <MetricsRow agents={activeAgents} />
+        <StallBanner agents={activeAgents} />
+        <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1 mb-4 w-fit">
+          {(["active", "archived"] as ViewKey[]).map((key) => (
+            <button
+              key={key}
+              onClick={() => setView(key)}
+              className={`px-4 py-1.5 rounded-md text-sm font-medium transition-colors ${
+                view === key ? "bg-white text-gray-800 shadow-sm" : "text-gray-500 hover:text-gray-700"
+              }`}
+            >
+              {key === "active" ? "Active" : `Archived (${archivedAgents.length})`}
+            </button>
+          ))}
+        </div>
         <div className="flex items-center gap-2 mb-4">
           <span className="text-sm text-gray-400">Sort by</span>
           {(["funnel", "added", "upline"] as SortKey[]).map((key) => (
@@ -97,7 +116,13 @@ export default function DashboardPage() {
             </button>
           ))}
         </div>
-        <FunnelGroups agents={sorted} sort={sort} />
+        {sorted.length === 0 ? (
+          <p className="text-sm text-gray-400">
+            {view === "archived" ? "No archived agents." : "No active agents."}
+          </p>
+        ) : (
+          <FunnelGroups agents={sorted} sort={sort} />
+        )}
       </main>
       {showAddModal && (
         <AddAgentModal
