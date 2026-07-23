@@ -86,6 +86,25 @@ export default function AgentDetailPage() {
     router.push("/dashboard");
   }
 
+  async function archiveAgent() {
+    if (!window.confirm("Archive this agent? They'll be hidden from the main dashboard until revived.")) return;
+    await fetch(`/api/admin/agents/${params.agentId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ archived_at: new Date().toISOString() }),
+    });
+    load();
+  }
+
+  async function reviveAgent() {
+    await fetch(`/api/admin/agents/${params.agentId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ archived_at: null }),
+    });
+    load();
+  }
+
   async function setContractsSent(sent: boolean) {
     await fetch(`/api/admin/agents/${params.agentId}/contracts-sent`, {
       method: "POST",
@@ -130,7 +149,7 @@ export default function AgentDetailPage() {
 
   return (
     <div className="flex min-h-screen">
-      <Sidebar agents={agents} activeAgentId={current.agent.id} onAddAgent={() => router.push("/dashboard")} />
+      <Sidebar agents={agents.filter((a) => !a.agent.archived_at)} activeAgentId={current.agent.id} onAddAgent={() => router.push("/dashboard")} />
       <main className="flex-1 p-8 max-w-4xl">
         <div className="flex items-center justify-between mb-6">
           <button onClick={() => router.push("/dashboard")} className="text-sm text-gray-500 hover:text-gray-800">
@@ -143,6 +162,21 @@ export default function AgentDetailPage() {
             >
               Edit agent
             </button>
+            {current.agent.archived_at ? (
+              <button
+                onClick={reviveAgent}
+                className="text-sm text-primary hover:underline"
+              >
+                Revive agent
+              </button>
+            ) : (
+              <button
+                onClick={archiveAgent}
+                className="text-sm text-gray-500 hover:underline"
+              >
+                Archive agent
+              </button>
+            )}
             <button
               onClick={deleteAgent}
               className="text-sm text-stall hover:underline"
@@ -154,6 +188,15 @@ export default function AgentDetailPage() {
             </button>
           </div>
         </div>
+
+        {current.agent.archived_at && (
+          <div className="rounded-xl bg-gray-100 border border-gray-200 px-4 py-2.5 mb-6 text-sm text-gray-600 flex items-center justify-between">
+            <span>This agent is archived and hidden from the main dashboard.</span>
+            <button onClick={reviveAgent} className="text-primary font-medium hover:underline">
+              Revive
+            </button>
+          </div>
+        )}
 
         <div className="bg-white rounded-2xl border border-gray-100 p-6 mb-6">
           <div className="flex items-start gap-4">

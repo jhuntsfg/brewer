@@ -13,6 +13,7 @@ export type Agent = {
   state: string | null;
   notes: string | null;
   stall_snoozed_until: string | null;
+  archived_at: string | null;
 };
 
 export type CheckRecord = {
