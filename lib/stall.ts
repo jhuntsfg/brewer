@@ -33,6 +33,12 @@ export function computeStall(
     return { label: "Finished course — exam not scheduled" };
   }
 
+  if (agent.type === "licensed" && !isChecked(checks, "7")) {
+    if (daysBetween(new Date(agent.start_date), today) >= 2) {
+      return { label: "Licensed — SFG application not submitted" };
+    }
+  }
+
   const licensedReadyForAmlBlock =
     isChecked(checks, "license_received") || (agent.type === "licensed" && isChecked(checks, "7"));
   if (licensedReadyForAmlBlock && !aml && !surelc && !eo) {
